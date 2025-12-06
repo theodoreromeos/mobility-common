@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package user;
+
+option java_multiple_files = true;
+option java_package = "com.theodore.user";
+
+enum ConfirmationStatus {
+  UNKNOWN = 0;
+  CONFIRMED = 1;
+  CONFIRMATION_FAILED = 2;
+}
+
+message CreateNewSimpleAuthUserRequest {
+  string email = 1;
+  string mobile_number = 2;
+  string password = 3;
+}
+
+message CreateNewOrganizationAuthUserRequest {
+  string email = 1;
+  string mobile_number = 2;
+  string password = 3;
+  string organizationRegNumber = 4;
+  string role = 5;
+}
+
+message ConfirmUserAccountRequest {
+  string user_id = 1;
+}
+
+message ConfirmAdminAccountRequest {
+  string user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+message ManageAuthUserAccountRequest {
+  string old_email = 1;
+  string new_email = 2;
+  string mobile_number = 3;
+  string old_password = 4;
+  string new_password = 5;
+}
+
+message AuthUserIdResponse {
+  string user_id = 1;
+}
+
+message OrganizationAdminUserIdAndEmail {
+  string admin_id = 1;
+  string admin_email = 2;
+}
+
+message OrgRegistrationNumberRequest {
+  string registration_number = 1;
+}
+
+message OrgAdminIdAndEmailResponse {
+  repeated OrganizationAdminUserIdAndEmail organization_admin_info = 1;
+}
+
+message UserConfirmationResponse {
+  ConfirmationStatus confirmation_status = 1;
+}
+
+service AuthServerNewUserRegistration {
+
+  rpc CreateSimpleUser(CreateNewSimpleAuthUserRequest) returns (AuthUserIdResponse);
+
+  rpc CreateOrganizationUser(CreateNewOrganizationAuthUserRequest) returns (AuthUserIdResponse);
+
+  rpc ConfirmUserAccount(ConfirmUserAccountRequest) returns (UserConfirmationResponse);
+
+  rpc ConfirmOrganizationAdminAccount(ConfirmAdminAccountRequest) returns (UserConfirmationResponse);
+
+  rpc GetAdminIdAndEmails(OrgRegistrationNumberRequest) returns (OrgAdminIdAndEmailResponse);
+
+}
+
+service AuthServerAccountManagement {
+
+  rpc ManageUserAccount(ManageAuthUserAccountRequest) returns (AuthUserIdResponse);
+
+}
