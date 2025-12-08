@@ -1,7 +1,5 @@
 package com.theodore.infrastructure.common.entities.modeltypes;
 
-import java.util.Optional;
-
 public enum RoleType {
 
     INTERNAL_SERVICE,
@@ -16,14 +14,6 @@ public enum RoleType {
 
     public String getScopeValue() {
         return this.name();
-    }
-
-    public static Optional<RoleType> getTypeFromString(String value) {
-        try {
-            return Optional.of(RoleType.valueOf(value));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
     }
 
 }

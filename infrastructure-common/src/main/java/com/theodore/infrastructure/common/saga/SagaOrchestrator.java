@@ -1,5 +1,6 @@
 package com.theodore.infrastructure.common.saga;
 
+import com.theodore.infrastructure.common.exceptions.SagaActionException;
 import com.theodore.infrastructure.common.exceptions.SagaOrchestrationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,29 +13,30 @@ public class SagaOrchestrator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SagaOrchestrator.class);
 
-    private final List<SagaStepWrapper> steps = new ArrayList<>();
+    private final List<SagaStep> steps = new ArrayList<>();
 
-    public SagaOrchestrator step(SagaStep step, CompensationAction compensation) {
-        steps.add(new SagaStepWrapper(step, compensation));
+    public SagaOrchestrator step(String name, SagaAction execute, SagaAction compensate) {
+        steps.add(new SagaStep(name, execute, compensate));
         return this;
     }
 
     public void run() {
-        List<SagaStepWrapper> executed = new ArrayList<>();
+        List<SagaStep> executed = new ArrayList<>();
         try {
-            for (SagaStepWrapper step : steps) {
-                step.execute();
+            for (SagaStep step : steps) {
+                step.execute().perform();
                 executed.add(step);
             }
         } catch (Exception e) {
             // Run compensation in reverse
             Collections.reverse(executed);
-            for (SagaStepWrapper step : executed) {
+            for (SagaStep step : executed) {
                 try {
                     LOGGER.info("Compensating step: {}", step);
-                    step.compensate();
+                    step.compensate().perform();
                 } catch (Exception ce) {
-                    LOGGER.error("Compensation failed: {}", ce.getMessage());
+                    var compensationEx = new SagaActionException(step.name(), SagaActionException.Phase.COMPENSATION, e);
+                    LOGGER.error("Compensation failed", compensationEx);
                 }
             }
             throw new SagaOrchestrationException(e.getMessage(), e);

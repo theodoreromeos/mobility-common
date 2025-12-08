@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class StrongPasswordValidatorImpl implements ConstraintValidator<StrongPasswordValidator, String> {
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(
-            // no whitespace, at least one lower, one upper, one digit, one non-alnum, and length ≥8
             "^(?=\\S+$)"          +  // no whitespace anywhere
                     "(?=.*[a-z])"         +  // at least one lowercase
                     "(?=.*[A-Z])"         +  // at least one uppercase

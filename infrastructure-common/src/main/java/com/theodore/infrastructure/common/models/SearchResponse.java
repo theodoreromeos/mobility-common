@@ -2,13 +2,16 @@ package com.theodore.infrastructure.common.models;
 
 import java.util.List;
 
+/**
+ * Used as a response for every search with criteria api.
+ */
 public class SearchResponse<T> {
 
-    private int pageNumber;         // Current page number (0-based)
-    private int pageSize;           // Size of each page
-    private long totalElements;     // Total number of results
-    private int totalPages;         // Total number of pages
-    private boolean last;           // Is this the last page?
+    private int pageNumber;
+    private int pageSize;
+    private long totalElements;
+    private int totalPages;
+    private boolean last;
     private boolean first;
     private List<T> data;
 
