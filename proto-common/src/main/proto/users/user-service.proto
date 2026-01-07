@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package user;
 
+import "google/protobuf/empty.proto";
+
 option java_multiple_files = true;
 option java_package = "com.theodore.user";
 
@@ -64,6 +66,11 @@ message UserConfirmationResponse {
   ConfirmationStatus confirmation_status = 1;
 }
 
+message AddRoleRequest {
+  string user_id = 1;
+  string role = 2;
+}
+
 service AuthServerNewUserRegistration {
 
   rpc CreateSimpleUser(CreateNewSimpleAuthUserRequest) returns (AuthUserIdResponse);
@@ -81,5 +88,11 @@ service AuthServerNewUserRegistration {
 service AuthServerAccountManagement {
 
   rpc ManageUserAccount(ManageAuthUserAccountRequest) returns (AuthUserIdResponse);
+
+}
+
+service AuthServerRoleManagement {
+
+  rpc AddRole(AddRoleRequest) returns (google.protobuf.Empty);
 
 }

@@ -16,4 +16,11 @@ public enum RoleType {
         return this.name();
     }
 
+    public static RoleType fromString(String value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Role cannot be null");
+        }
+        return RoleType.valueOf(value.trim().toUpperCase());
+    }
+
 }
