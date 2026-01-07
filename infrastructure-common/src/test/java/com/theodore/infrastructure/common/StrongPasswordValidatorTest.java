@@ -20,7 +20,6 @@ class StrongPasswordValidatorTest {
         validator = new StrongPasswordValidatorImpl();
     }
 
-    // A dummy context, since your implementation doesn't actually use it
     private final ConstraintValidatorContext dummyContext = null;
 
     @ParameterizedTest
