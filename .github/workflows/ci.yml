@@ -2,9 +2,9 @@ name: CI (mobility-common)
 
 on:
   push:
-    branches: [ "ci-test" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "ci-test" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
@@ -25,4 +25,4 @@ jobs:
           cache: maven
 
       - name: Build all modules
-        run: mvn -B -ntp -DskipTests verify
+        run: mvn -B -ntp -DskipTests clean verify
