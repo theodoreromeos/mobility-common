@@ -2,15 +2,16 @@ name: CI (mobility-common)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "ci-test" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "ci-test" ]
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,5 +25,24 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Build all modules
-        run: mvn -B -ntp -DskipTests clean verify
+      - name: Configure Maven for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml << 'EOF'
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${env.GITHUB_ACTOR}</username>
+                <password>${env.GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn -B -ntp -DskipTests deploy
