@@ -34,7 +34,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/theodoreromeos/mobility-common.git</url>
+            <url>https://maven.pkg.github.com/theodoreromeos/mobility-common</url>
         </repository>
     </distributionManagement>
 
