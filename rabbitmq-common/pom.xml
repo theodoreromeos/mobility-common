@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.theodore.common</groupId>
         <artifactId>mobility-common</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 	<artifactId>rabbitmq-common</artifactId>
-	<version>0.0.1</version>
 	<name>rabbitmq-common</name>
 	<description>RabbitMQ common tools</description>
 

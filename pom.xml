@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.theodore.common</groupId>
     <artifactId>mobility-common</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.4</version>
     <name>mobility-common</name>
     <packaging>pom</packaging>
 
@@ -32,9 +32,15 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/theodoreromeos/mobility-common.git</url>
+            <url>https://maven.pkg.github.com/theodoreromeos/mobility-common</url>
         </repository>
     </distributionManagement>
+
+    <scm>
+        <url>https://github.com/theodoreromeos/mobility-common</url>
+        <connection>scm:git:https://github.com/theodoreromeos/mobility-common.git</connection>
+        <developerConnection>scm:git:git@github.com:theodoreromeos/mobility-common.git</developerConnection>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
@@ -51,6 +57,7 @@
     <build>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -59,7 +66,6 @@
                         <release>${java.version}</release>
                     </configuration>
                 </plugin>
-
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
