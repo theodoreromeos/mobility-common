@@ -2,9 +2,10 @@ name: CI (mobility-common)
 
 on:
   push:
-    branches: [ "ci-test" ]
+    tags:
+      - "v*"
   pull_request:
-    branches: [ "ci-test" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
