@@ -8,7 +8,10 @@ public enum EmailQueueEnum {
 
     DLQ("email.dlq"),
     DLX("email.dlx"),
-    DLQ_ROUTING_KEY("email.routing.key.dlx");
+    DLQ_ROUTING_KEY("email.routing.key.dlx"),
+
+    DLQ_OVERFLOW("email.dlq.overflow"),
+    DLQ_OVERFLOW_EXCHANGE("email.dlq.overflow.exchange");
 
     private final String value;
 

@@ -12,6 +12,7 @@ public class CredentialsQueueConfig {
     @Bean
     public Queue credentialsMainQueue() {
         return QueueBuilder.durable(CredentialsQueueEnum.QUEUE.getValue())
+                .quorum()
                 .withArgument("x-dead-letter-exchange", CredentialsQueueEnum.DLX.getValue())
                 .withArgument("x-dead-letter-routing-key", CredentialsQueueEnum.DLQ_ROUTING_KEY.getValue())
                 .build();
@@ -25,6 +26,11 @@ public class CredentialsQueueConfig {
     }
 
     @Bean
+    public Queue credentialsDlqOverflow() {
+        return QueueBuilder.durable(CredentialsQueueEnum.DLQ_OVERFLOW.getValue()).build();
+    }
+
+    @Bean
     public DirectExchange credentialsMainQueueExchange() {
         return new DirectExchange(CredentialsQueueEnum.QUEUE_EXCHANGE.getValue());
     }
@@ -35,6 +41,11 @@ public class CredentialsQueueConfig {
     }
 
     @Bean
+    public DirectExchange credentialsDlqOverflowExchange() {
+        return new DirectExchange(CredentialsQueueEnum.DLQ_OVERFLOW_EXCHANGE.getValue());
+    }
+
+    @Bean
     public Binding credentialsMainQueueBinding() {
         return BindingBuilder.bind(credentialsMainQueue()).to(credentialsMainQueueExchange()).with(CredentialsQueueEnum.QUEUE_ROUTING_KEY.getValue());
     }
@@ -42,6 +53,11 @@ public class CredentialsQueueConfig {
     @Bean
     public Binding credentialsDlqBinding() {
         return BindingBuilder.bind(credentialsDlq()).to(credentialsDeadLetterExchange()).with(CredentialsQueueEnum.DLQ_ROUTING_KEY.getValue());
+    }
+
+    @Bean
+    public Binding credentialsDlqOverflowBinding() {
+        return BindingBuilder.bind(credentialsDlqOverflow()).to(credentialsDlqOverflowExchange()).with("");
     }
 
 }
