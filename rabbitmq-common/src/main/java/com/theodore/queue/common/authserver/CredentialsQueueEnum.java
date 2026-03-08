@@ -8,7 +8,10 @@ public enum CredentialsQueueEnum {
 
     DLQ("credentials.dlq"),
     DLX("credentials.dlx"),
-    DLQ_ROUTING_KEY("credentials.routing.key.dlx");
+    DLQ_ROUTING_KEY("credentials.routing.key.dlx"),
+
+    DLQ_OVERFLOW("credentials.dlq.overflow"),
+    DLQ_OVERFLOW_EXCHANGE("credentials.dlq.overflow.exchange");
 
     private final String value;
 

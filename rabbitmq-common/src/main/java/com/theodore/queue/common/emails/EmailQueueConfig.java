@@ -13,6 +13,7 @@ public class EmailQueueConfig {
     @Bean
     public Queue emailMainQueue() {
         return QueueBuilder.durable(EmailQueueEnum.QUEUE.getValue())
+                .quorum()
                 .withArgument("x-dead-letter-exchange", EmailQueueEnum.DLX.getValue())
                 .withArgument("x-dead-letter-routing-key", EmailQueueEnum.DLQ_ROUTING_KEY.getValue())
                 .build();
@@ -26,6 +27,11 @@ public class EmailQueueConfig {
     }
 
     @Bean
+    public Queue emailDlqOverflow() {
+        return QueueBuilder.durable(EmailQueueEnum.DLQ_OVERFLOW.getValue()).build();
+    }
+
+    @Bean
     public DirectExchange emailMainQueueExchange() {
         return new DirectExchange(EmailQueueEnum.QUEUE_EXCHANGE.getValue());
     }
@@ -36,6 +42,11 @@ public class EmailQueueConfig {
     }
 
     @Bean
+    public DirectExchange emailDlqOverflowExchange() {
+        return new DirectExchange(EmailQueueEnum.DLQ_OVERFLOW_EXCHANGE.getValue());
+    }
+
+    @Bean
     public Binding emailMainQueueBinding() {
         return BindingBuilder.bind(emailMainQueue()).to(emailMainQueueExchange()).with(EmailQueueEnum.QUEUE_ROUTING_KEY.getValue());
     }
@@ -43,6 +54,11 @@ public class EmailQueueConfig {
     @Bean
     public Binding emailDlqBinding() {
         return BindingBuilder.bind(emailDlq()).to(emailDeadLetterExchange()).with(EmailQueueEnum.DLQ_ROUTING_KEY.getValue());
+    }
+
+    @Bean
+    public Binding emailDlqOverflowBinding() {
+        return BindingBuilder.bind(emailDlqOverflow()).to(emailDlqOverflowExchange()).with("");
     }
 
 }

@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "name": "mobilityqueueuser",
+      "password": "Strong-password1",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    { "name": "/mobility" }
+  ],
+  "permissions": [
+    {
+      "user": "mobilityqueueuser",
+      "vhost": "/mobility",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ]
+}
