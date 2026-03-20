@@ -3,16 +3,16 @@ package com.theodore.queue.common.authserver;
 public enum RollbackQueueEnum {
 
     // CREDENTIALS
-    CREDENTIALS_QUEUE("rollback.credentials.queue"),
-    CREDENTIALS_QUEUE_ROUTING_KEY("rollback.credentials.routing-key"),
-    CREDENTIALS_DLQ("rollback.credentials.dlq"),
-    CREDENTIALS_DLQ_ROUTING_KEY("rollback.credentials.dlq.routing-key"),
+    CREDENTIALS_QUEUE("rollback.queue.credentials"),
+    CREDENTIALS_QUEUE_ROUTING_KEY("rollback.queue.credentials.routing-key"),
+    CREDENTIALS_DLQ("rollback.dlq.credentials"),
+    CREDENTIALS_DLQ_ROUTING_KEY("rollback.dlq.credentials.routing-key"),
 
     // ROLES
-    ROLES_QUEUE("rollback.roles.queue"),
-    ROLES_QUEUE_ROUTING_KEY("rollback.roles.routing-key"),
-    ROLES_DLQ("rollback.roles.dlq"),
-    ROLES_DLQ_ROUTING_KEY("rollback.roles.dlq.routing-key"),
+    ROLES_QUEUE("rollback.queue.roles"),
+    ROLES_QUEUE_ROUTING_KEY("rollback.queue.roles.routing-key"),
+    ROLES_DLQ("rollback.dlq.roles"),
+    ROLES_DLQ_ROUTING_KEY("rollback.dlq.roles.routing-key"),
 
     // SHARED
     QUEUE_EXCHANGE("rollback.exchange"),

@@ -33,7 +33,7 @@ public class MessagingServiceImpl implements MessagingService {
     public void rollbackCredentialsSave(CredentialsRollbackEventDto dto) {
         rabbitTemplate.convertAndSend(
                 RollbackQueueEnum.QUEUE_EXCHANGE.getValue(),
-                RollbackQueueEnum.QUEUE_ROUTING_KEY.getValue(),
+                RollbackQueueEnum.CREDENTIALS_QUEUE_ROUTING_KEY.getValue(),
                 dto
         );
     }

@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>com.theodore.common</groupId>
 			<artifactId>infrastructure-common</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
