@@ -1,5 +1,6 @@
 package com.theodore.queue.common.services;
 
+import com.theodore.queue.common.authserver.RolesRollbackEventDto;
 import com.theodore.queue.common.authserver.RollbackQueueEnum;
 import com.theodore.queue.common.authserver.CredentialsRollbackEventDto;
 import com.theodore.queue.common.emails.EmailDto;
@@ -34,6 +35,15 @@ public class MessagingServiceImpl implements MessagingService {
         rabbitTemplate.convertAndSend(
                 RollbackQueueEnum.QUEUE_EXCHANGE.getValue(),
                 RollbackQueueEnum.CREDENTIALS_QUEUE_ROUTING_KEY.getValue(),
+                dto
+        );
+    }
+
+    @Override
+    public void rollbackRolesAssignment(RolesRollbackEventDto dto) {
+        rabbitTemplate.convertAndSend(
+                RollbackQueueEnum.QUEUE_EXCHANGE.getValue(),
+                RollbackQueueEnum.ROLES_QUEUE_ROUTING_KEY.getValue(),
                 dto
         );
     }
