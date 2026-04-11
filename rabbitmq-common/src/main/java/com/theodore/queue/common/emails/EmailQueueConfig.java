@@ -23,6 +23,8 @@ public class EmailQueueConfig {
     public Queue emailDlq() {
         return QueueBuilder.durable(EmailQueueEnum.DLQ.getValue())
                 .withArgument("x-message-ttl", 86400000) // 24 hours
+                .deadLetterExchange(EmailQueueEnum.DLQ_OVERFLOW_EXCHANGE.getValue())
+                .deadLetterRoutingKey("")
                 .build();
     }
 
