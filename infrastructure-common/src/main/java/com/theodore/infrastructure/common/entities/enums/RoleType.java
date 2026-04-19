@@ -1,4 +1,4 @@
-package com.theodore.infrastructure.common.entities.modeltypes;
+package com.theodore.infrastructure.common.entities.enums;
 
 public enum RoleType {
 

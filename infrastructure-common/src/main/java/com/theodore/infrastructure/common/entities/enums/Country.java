@@ -1,4 +1,4 @@
-package com.theodore.infrastructure.common.enums;
+package com.theodore.infrastructure.common.entities.enums;
 
 import java.util.*;
 
