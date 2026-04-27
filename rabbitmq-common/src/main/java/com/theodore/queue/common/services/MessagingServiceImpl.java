@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
+import java.util.UUID;
+
 public class MessagingServiceImpl implements MessagingService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessagingServiceImpl.class);
@@ -26,7 +28,12 @@ public class MessagingServiceImpl implements MessagingService {
         rabbitTemplate.convertAndSend(
                 EmailQueueEnum.QUEUE_EXCHANGE.getValue(),
                 EmailQueueEnum.QUEUE_ROUTING_KEY.getValue(),
-                emails
+                emails,
+                message -> {
+                    message.getMessageProperties()
+                            .setMessageId(UUID.randomUUID().toString());
+                    return message;
+                }
         );
     }
 
