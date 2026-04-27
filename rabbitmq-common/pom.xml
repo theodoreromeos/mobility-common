@@ -12,6 +12,16 @@
 	<name>rabbitmq-common</name>
 	<description>RabbitMQ common tools</description>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.theodore.common</groupId>
+				<artifactId>rabbitmq-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -22,12 +32,14 @@
 			<groupId>com.theodore.common</groupId>
 			<artifactId>infrastructure-common</artifactId>
 			<version>${project.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
