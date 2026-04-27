@@ -5,12 +5,22 @@
     <parent>
         <groupId>com.theodore.common</groupId>
         <artifactId>mobility-common</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 	<artifactId>rabbitmq-common</artifactId>
 	<name>rabbitmq-common</name>
 	<description>RabbitMQ common tools</description>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.theodore.common</groupId>
+				<artifactId>rabbitmq-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -22,12 +32,14 @@
 			<groupId>com.theodore.common</groupId>
 			<artifactId>infrastructure-common</artifactId>
 			<version>${project.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
