@@ -12,7 +12,7 @@ permissions:
   packages: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +25,9 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: Build and Test
+        run: mvn -B -ntp verify
 
       - name: Configure Maven for GitHub Packages
         run: |
@@ -43,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy
+      - name: Deploy to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn -B -ntp -DskipTests deploy
