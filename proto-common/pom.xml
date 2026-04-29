@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.theodore.common</groupId>
         <artifactId>mobility-common</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>proto-common</artifactId>
@@ -29,6 +29,11 @@
                 <version>${grpc.java.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.theodore.common</groupId>
+                <artifactId>proto-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
